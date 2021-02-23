@@ -3,8 +3,6 @@ const baseURL = 'http://api.openweathermap.org/data/2.5/weather?zip=';
 
 // const baseCityURL = 'http://api.openweathermap.org/data/2.5/weather?q=';
 
-// API key
-const apiKey = '&units=metric&appid=310c1538aed7651b17f6943c7095ad63';
 
 // New date stored in a variable to be displayed
 let d = new Date()
