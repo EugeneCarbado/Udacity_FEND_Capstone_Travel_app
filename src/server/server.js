@@ -3,35 +3,40 @@
 // Empty array to store project data
 let projectData = {};
 
-// Express to run server and routes
+// All required server elements
+const bodyParser = require('body-parser')
 const express = require('express');
+const cors = require('cors');
+const fetch = require('node-fetch');
 
-// Start up an instance of app
 const app = express();
 
-// Dependencies
-const bodyParser = require('body-parser')
+const dotenv = require('dotenv');
+dotenv.config();
 
 // Middleware
 app.use(bodyParser.urlencoded({ extended: false}));
 app.use(bodyParser.json());
 
 // Cross origin allowance
-const cors = require('cors');
 app.use(cors());
 
 //  Initializing the main project folder
 app.use(express.static('dist'));
 
-// sets the port. In this case 8080
-const port = 8080;
+// 3 URL'S and there API keys
+const geoNamesApiKey = `&username=${process.env.GEONAMES_API}`;
+const geoNamesRoot = 'http://api.geonames.org/searchJSON?q=';
+const geoNamesParams = "&maxRows=1";
 
-// spin up server
-const server = app.listen(port, listening);
-function listening() {
-    console.log(server);
-    console.log(`running on localhost: ${port}`);
-}
+// const weatherBitApiKey = ;
+// const weatherBitRoot = ;
+// const weatherBitParams = ;
+
+// const pixabayApiKey = ;
+// const pixabayRoot = ;
+// const pixabayParams = ;
+
 
 // Get route
 app.get('/retrieve', getData);
@@ -48,3 +53,5 @@ function postData(request, response)  {
     response.send({ message: "Post recieved"})
     console.log(request);
 }
+
+module.exports = app;
