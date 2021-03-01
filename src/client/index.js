@@ -1,5 +1,5 @@
-import { changeImg } from "./js/random_img";
 import { picker } from "./js/date_picker";
+import { userInfo } from "./js/app";
 
 // import
 
@@ -10,5 +10,5 @@ import "./styles/calender.scss";
 // import './styles/form.scss';
 // import './styles/header.scss';
 
-export { changeImg };
 export { picker };
+export { userInfo };

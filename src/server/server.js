@@ -1,8 +1,5 @@
 "use strict";
 
-// Empty array to store project data
-let projectData = {};
-
 // All required server elements
 const bodyParser = require('body-parser')
 const express = require('express');
@@ -25,33 +22,28 @@ app.use(cors());
 app.use(express.static('dist'));
 
 // 3 URL'S and there API keys
-const geoNamesApiKey = `&username=${process.env.GEONAMES_API}`;
+/* const geoNamesApiKey = `&username=${process.env.GEONAMES_API}`;
 const geoNamesRoot = 'http://api.geonames.org/searchJSON?q=';
-const geoNamesParams = "&maxRows=1";
+const geoNamesParams = "&maxRows=1"; */
 
-// const weatherBitApiKey = ;
-// const weatherBitRoot = ;
+const weatherBitApiKey = `&key=${process.env.WEATHERBIT_API}`;
+const weatherBitRoot = 'https://api.weatherbit.io/v2.0/forecast/daily?city=';
 // const weatherBitParams = ;
 
-// const pixabayApiKey = ;
-// const pixabayRoot = ;
+const pixabayApiKey = `?key=${process.env.PIXABAY_API}`;
+const pixabayRoot = 'https://pixabay.com/api/';
 // const pixabayParams = ;
 
+// Empty array to store project data
+let projectData = [];
 
-// Get route
-app.get('/retrieve', getData);
-
-function getData (request, response) {
-    response.send(projectData);
-}
+app.get("/", (req, res) => res.send('dist/index.html'));
 
 // POST route
-app.post('/add', postData)
+app.post('/endData', (req, res) => {
+    
+    console.log(req.body);
+})
 
-function postData(request, response)  {
-    projectData = request.body;
-    response.send({ message: "Post recieved"})
-    console.log(request);
-}
 
 module.exports = app;
