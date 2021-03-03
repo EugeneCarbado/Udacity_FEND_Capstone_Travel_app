@@ -1,5 +1,3 @@
-"use strict";
-
 // All required server elements
 const bodyParser = require('body-parser')
 const express = require('express');
@@ -37,14 +35,12 @@ const pixabayRoot = 'https://pixabay.com/api/';
 // Empty array to store project data
 let projectData = {};
 
-const port = 3000;
-
 // spin up server
-const server = app.listen(port, listening);
-function listening() {
-    console.log(server);
-    console.log(`running on localhost: ${port}`);
-}
+app.listen(3000, () => console.log('running on localhost 3000'));
+
+app.post('/clientData', (req, res) => {
+    console.log(req);
+})
 
 
 module.exports = app;
