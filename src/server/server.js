@@ -22,9 +22,9 @@ app.use(cors());
 app.use(express.static('dist'));
 
 // 3 URL'S and there API keys
-/* const geoNamesApiKey = `&username=${process.env.GEONAMES_API}`;
+const geoNamesApiKey = `&username=${process.env.GEONAMES_API}`;
 const geoNamesRoot = 'http://api.geonames.org/searchJSON?q=';
-const geoNamesParams = "&maxRows=1"; */
+const geoNamesParams = "&maxRows=1";
 
 const weatherBitApiKey = `&key=${process.env.WEATHERBIT_API}`;
 const weatherBitRoot = 'https://api.weatherbit.io/v2.0/forecast/daily?city=';
@@ -35,15 +35,16 @@ const pixabayRoot = 'https://pixabay.com/api/';
 // const pixabayParams = ;
 
 // Empty array to store project data
-let projectData = [];
+let projectData = {};
 
-app.get("/", (req, res) => res.send('dist/index.html'));
+const port = 3000;
 
-// POST route
-app.post('/endData', (req, res) => {
-    
-    console.log(req.body);
-})
+// spin up server
+const server = app.listen(port, listening);
+function listening() {
+    console.log(server);
+    console.log(`running on localhost: ${port}`);
+}
 
 
 module.exports = app;

@@ -1,5 +1,5 @@
 import { picker } from "./js/date_picker";
-import { userInfo } from "./js/app";
+import { userInput } from "./js/app";
 
 // import
 
@@ -11,4 +11,4 @@ import "./styles/calender.scss";
 // import './styles/header.scss';
 
 export { picker };
-export { userInfo };
+export { userInput };
