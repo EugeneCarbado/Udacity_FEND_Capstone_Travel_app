@@ -38,43 +38,29 @@ app.listen(3000, () => console.log('running on localhost 3000'));
 // Empty array to store project data
 let projectData = {};
 
+app.get('/', function (req, res) {
+    res.send('dist/index.html');
+});
+
 // Post route that collects user data and stores it in "projectData" object
-app.post('/clientData', (req, res) => {
+app.post('/clientData', async (req, res) => {
     const data = req.body;
     projectData = data;
     console.log(projectData);
-})
 
-// Get routes for all api's
-app.get('/getGeonames', (req, res) => {
-    console.log('Get geonamesData')
-    const urlPath = geoNamesRoot + projectData.city + geoNamesApiKey + geoNamesParams;
-    console.log(urlPath);
-    fetch(urlPath)
-        .then(res => res.json())
-            .then(response => {
-                try {
-                    console.log('Goenames Data');
-                    console.log(response);
-                    projectData['long'] = response.geonames[0].lng;
-                    projectData['lat'] = response.geonames[0].lat;
-                    projectData['name'] = response.geonames[0].name;
-                    projectData['country'] = response.geonames[0].country;
-                    projectData['code'] = response.geonames[0].countryCode;
-                    res.send(true);
-                } catch (e) {
-                    console.log('Error: ', e)
-                }
-            })
-            .catch(error => {
-                res.send(JSON.stringify({error: error}));
-            })
-})
+    const geonamesData = await fetch(`${geoNamesRoot}${data.city}${geoNamesApiKey}${geoNamesParams}`, {
+        method: 'POST'
+    });
 
-app.get('/getData', (req, res) => {
-    console.log(projectData);
-    res.send(projectData);
-})
+    try {
+        const data = await geonamesData.json();
+        console.log('apiData ++++>', data)
+        res.send(data);
+    } catch (err) {
+        console.log("error", err);
+    }
+    
+});
 
 
 module.exports = app;

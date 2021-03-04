@@ -29,9 +29,9 @@ async function userInput(e) {
     });
 
     // functions to call servers after post request
-    await callServer(`/getGeonames`);
+    await callServer("/getGeonames");
 
-    const getPlanData = await callServer(`/getPlan`);
+    const getPlanData = await callServer("/getData");
 
     console.log(getPlanData);
   } else {
