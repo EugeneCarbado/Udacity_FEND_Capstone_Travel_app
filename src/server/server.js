@@ -32,14 +32,55 @@ const pixabayApiKey = `?key=${process.env.PIXABAY_API}`;
 const pixabayRoot = 'https://pixabay.com/api/';
 // const pixabayParams = ;
 
-// Empty array to store project data
-let projectData = {};
-
 // spin up server
 app.listen(3000, () => console.log('running on localhost 3000'));
 
+// Empty array to store project data
+let projectData = {};
+
+app.get('/geoNames', async (req, res) => {
+    const geoNamesCall = `${geoNamesRoot}${projectData.city}${geoNamesApiKey}${geoNamesParams}`;
+    const fetch_res = await fetch(geoNamesCall);
+    const json = await fetch_res.json();
+    res.json(json);
+})
+
+// Post route that collects user data and stores it in "projectData" object
 app.post('/clientData', (req, res) => {
-    console.log(req);
+    const data = req.body;
+    projectData = data;
+    console.log(projectData);
+})
+
+// Get routes for all api's
+app.get('/getGeonames', (req, res) => {
+    console.log('Get geonamesData')
+    const urlPath = geoNamesRoot + projectData.city + geoNamesApiKey + geoNamesParams;
+    console.log(urlPath);
+    fetch(urlPath)
+        .then(res => res.json())
+            .then(response => {
+                try {
+                    console.log('Goenames Data');
+                    console.log(response);
+                    projectData['long'] = response.geonames[0].lng;
+                    projectData['lat'] = response.geonames[0].lat;
+                    projectData['name'] = response.geonames[0].name;
+                    projectData['country'] = response.geonames[0].country;
+                    projectData['code'] = response.geonames[0].countryCode;
+                    res.send(true);
+                } catch (e) {
+                    console.log('Error: ', e)
+                }
+            })
+            .catch(error => {
+                res.send(JSON.stringify({error: error}));
+            })
+})
+
+app.get('/getData', (req, res) => {
+    console.log(projectData);
+    res.send(projectData);
 })
 
 
