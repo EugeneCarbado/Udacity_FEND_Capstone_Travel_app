@@ -38,13 +38,6 @@ app.listen(3000, () => console.log('running on localhost 3000'));
 // Empty array to store project data
 let projectData = {};
 
-app.get('/geoNames', async (req, res) => {
-    const geoNamesCall = `${geoNamesRoot}${projectData.city}${geoNamesApiKey}${geoNamesParams}`;
-    const fetch_res = await fetch(geoNamesCall);
-    const json = await fetch_res.json();
-    res.json(json);
-})
-
 // Post route that collects user data and stores it in "projectData" object
 app.post('/clientData', (req, res) => {
     const data = req.body;
