@@ -31,7 +31,7 @@ const weatherBitRoot = 'https://api.weatherbit.io/v2.0/forecast/daily?';
 
 const pixabayApiKey = `?key=${process.env.PIXABAY_API}`;
 const pixabayRoot = 'https://pixabay.com/api/';
-// const pixabayParams = ;
+const pixabayParams = '&image_type=photo&orientation=horizontal&safesearch=true&per_page=100';
 
 // spin up server
 app.listen(3000, () => console.log('running on localhost 3000'));
@@ -92,6 +92,45 @@ app.get('/getWeatherbit', async (req, res) => {
     }
 })
 
+// Endpoint for the Pixabay API
+app.get('/getPix', async (req, res) => {
+    console.log(`Pixabay request city is ${projectData.name}`);
+    const city = projectData.name;
+    let pixabayURL = `${pixabayRoot}${city}${pixabayApiKey}${pixabayParams}`;
+    console.log(`Pixabay URL is ${pixabayURL}`);
+    try {
+        let response = await fetch(pixabayURL);
+        // Checks for failed data transfer from API, returns null
+        if (!response.ok) {
+            console.log(`Error connecting to Pixabay API. Response status ${response.status}`);
+            res.send(null);
+        }
+        let pixData = await response.json();
+        res.send(pixData);
+        console.log(pixData);
+
+        // If no photo was returned for city, get one for the country instead
+        if (responseJSON.total == 0) {
+            const country = projectData.countryName;
+            console.log(`No photo available for ${city}. Finding photo for ${country}.`);
+            pixabayURL = `${pixabayRoot}${country}${pixabayApiKey}${pixabayParams}`;
+            console.log(`Pixabay country search URL is ${pixabayURL}`);
+            response = await fetch(pixabayURL)
+            // Checks for failed data transfer from API, returns null
+            if (!response.ok) {
+                console.log(`Error connecting to Pixabay. Response status ${response.status}`)
+                res.send(null)
+            }
+            responseJSON = await response.json()
+        }
+
+        res.send(responseJSON)
+        // If failed connection to API, return null
+    } catch (error) {
+        console.log(`Error connecting to server: ${error}`)
+        res.send(null)
+    }
+})
 
 
 module.exports = app;

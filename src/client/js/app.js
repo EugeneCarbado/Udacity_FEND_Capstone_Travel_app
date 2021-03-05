@@ -31,7 +31,7 @@ async function userInput(e) {
     // functions to call servers after post request
     await callServer("/getWeatherbit");
 
-    // await callServer("/getPix");
+    await callServer("/getPix");
 
     // const getPlanData = await callServer("/getData");
 
