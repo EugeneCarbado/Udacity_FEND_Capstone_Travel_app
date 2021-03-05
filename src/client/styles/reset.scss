@@ -390,13 +390,13 @@ legend + * {
 }
 
 /* rtl:raw:
-  [type="tel"],
-  [type="url"],
-  [type="email"],
-  [type="number"] {
-    direction: ltr;
-  }
-  */
+   [type="tel"],
+   [type="url"],
+   [type="email"],
+   [type="number"] {
+     direction: ltr;
+   }
+   */
 ::-webkit-search-decoration {
   -webkit-appearance: none;
 }

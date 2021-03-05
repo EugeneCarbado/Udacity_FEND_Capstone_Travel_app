@@ -29,11 +29,13 @@ async function userInput(e) {
     });
 
     // functions to call servers after post request
-    await callServer("/getGeonames");
+    await callServer("/getWeatherbit");
 
-    const getPlanData = await callServer("/getData");
+    // await callServer("/getPix");
 
-    console.log(getPlanData);
+    // const getPlanData = await callServer("/getData");
+
+    // console.log(getPlanData);
   } else {
     alert("Please enter a valid date.");
   }
