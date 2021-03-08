@@ -49,17 +49,17 @@ app.post('/clientData', async (req, res) => {
     projectData = data;
     console.log(projectData);
 
-    const geonamesData = await fetch(`${geoNamesRoot}${data.city}${geoNamesApiKey}${geoNamesParams}`, {
+    const geonamesUrl = await fetch(`${geoNamesRoot}${data.city}${geoNamesApiKey}${geoNamesParams}`, {
         method: 'POST'
     });
 
     try {
-        const data = await geonamesData.json();
-        projectData['long'] = data.geonames[0].lng;
-        projectData['lat'] = data.geonames[0].lat;
-        projectData['name'] = data.geonames[0].name; //toponymName
-        projectData['countryName'] = data.geonames[0].countryName;
-        projectData['code'] = data.geonames[0].countryCode;
+        const geoData = await geonamesUrl.json();
+        projectData['long'] = geoData.geonames[0].lng;
+        projectData['lat'] = geoData.geonames[0].lat;
+        projectData['name'] = geoData.geonames[0].name; //toponymName
+        projectData['countryName'] = geoData.geonames[0].countryName;
+        projectData['code'] = geoData.geonames[0].countryCode;
         console.log('apiData ++++>', projectData)
         res.send(projectData);
     } catch (err) {
@@ -84,9 +84,9 @@ app.get('/getWeatherbit', async (req, res) => {
             res.send(null);
         }
         const weatherbitData = await response.json();
-        projectData['icon'] = weatherbitData[0].weather.icon;
-        projectData['description'] = weatherbitData[0].weather.description;
-        projectData['temp'] = weatherbitData[0].temp;
+        projectData['icon'] = weatherbitData.data[0].weather.icon;
+        projectData['description'] = weatherbitData.data[0].weather.description;
+        projectData['temp'] = weatherbitData.data[0].temp;
         res.send(weatherbitData);
         console.log(weatherbitData);
         // If failed connection to API, return null

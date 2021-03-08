@@ -1,6 +1,6 @@
 import fetch from "node-fetch";
 
-// This event listener listens for the click on the search button
+// This event listener listens for a click on the search button
 document.getElementById("btn").addEventListener("click", userInput);
 
 // Function that fires off when the click has been registered
@@ -36,6 +36,7 @@ async function userInput(e) {
     const getPlanData = await callServer("/getData");
 
     console.log(getPlanData);
+    updateUI();
   } else {
     alert("Please enter a valid date.");
   }
@@ -70,5 +71,9 @@ const callServer = async (url) => {
     console.log(`Error: ${res.statusText}`);
   }
 };
+
+function updateUI() {
+  
+}
 
 export { userInput };
