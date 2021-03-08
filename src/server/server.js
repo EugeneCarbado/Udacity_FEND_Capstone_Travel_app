@@ -96,7 +96,7 @@ app.get('/getWeatherbit', async (req, res) => {
 app.get('/getPix', async (req, res) => {
     console.log(`Pixabay request city is ${projectData.name}`);
     const city = projectData.name;
-    let pixabayURL = `${pixabayRoot}${city}${pixabayApiKey}${pixabayParams}`;
+    let pixabayURL = `${pixabayRoot}${pixabayApiKey}&q=${city}${pixabayParams}`;
     console.log(`Pixabay URL is ${pixabayURL}`);
     try {
         let response = await fetch(pixabayURL);
@@ -106,8 +106,12 @@ app.get('/getPix', async (req, res) => {
             res.send(null);
         }
         let pixData = await response.json();
+        const image1 = pixData.hits[0].webformatURL;
+        const image2 = pixData.hits[1].webformatURL;
+        const image3 = pixData.hits[2].webformatURL;
         res.send(pixData);
-        console.log(pixData);
+        console.log(image1, image2, image3);
+        image1, image2, image3 = projectData;
 
         // If no photo was returned for city, get one for the country instead
         if (responseJSON.total == 0) {
@@ -130,6 +134,11 @@ app.get('/getPix', async (req, res) => {
         console.log(`Error connecting to server: ${error}`)
         res.send(null)
     }
+})
+
+app.get('/getData', (req, res) => {
+    console.log(projectData);
+    res.send(projectData);
 })
 
 

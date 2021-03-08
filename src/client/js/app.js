@@ -33,9 +33,9 @@ async function userInput(e) {
 
     await callServer("/getPix");
 
-    // const getPlanData = await callServer("/getData");
+    const getPlanData = await callServer("/getData");
 
-    // console.log(getPlanData);
+    console.log(getPlanData);
   } else {
     alert("Please enter a valid date.");
   }
