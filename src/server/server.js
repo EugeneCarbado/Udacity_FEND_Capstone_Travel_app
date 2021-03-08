@@ -77,12 +77,16 @@ app.get('/getWeatherbit', async (req, res) => {
     console.log(`Weatherbit URL is ${weatherbitURL}`);
     try {
         const response = await fetch(weatherbitURL);
+        
         // Checks for failed data transfer from API, returns null
         if (!response.ok) {
             console.log(`Error connecting to Weatherbit API. Response status ${response.status}`);
             res.send(null);
         }
         const weatherbitData = await response.json();
+        projectData['icon'] = weatherbitData[0].weather.icon;
+        projectData['description'] = weatherbitData[0].weather.description;
+        projectData['temp'] = weatherbitData[0].temp;
         res.send(weatherbitData);
         console.log(weatherbitData);
         // If failed connection to API, return null
@@ -106,9 +110,9 @@ app.get('/getPix', async (req, res) => {
             res.send(null);
         }
         let pixData = await response.json();
-        const image1 = pixData.hits[0].webformatURL;
-        const image2 = pixData.hits[1].webformatURL;
-        const image3 = pixData.hits[2].webformatURL;
+        projectData['image1'] = pixData.hits[0].webformatURL;
+        projectData['image2'] = pixData.hits[1].webformatURL;
+        projectData['image3'] = pixData.hits[2].webformatURL;
         res.send(pixData);
         console.log(image1, image2, image3);
         image1, image2, image3 = projectData;
