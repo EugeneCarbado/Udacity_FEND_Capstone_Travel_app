@@ -1,4 +1,5 @@
 import fetch from "node-fetch";
+import { doc } from "prettier";
 
 // This event listener listens for a click on the search button
 document.getElementById("btn").addEventListener("click", userInput);
@@ -38,7 +39,7 @@ async function userInput(e) {
     const getPlanData = await callServer("/getData");
 
     console.log(getPlanData);
-    // updateUI();
+    updateUI();
   } else {
     alert("Please enter a valid date.");
   }
@@ -74,6 +75,22 @@ const callServer = async (url) => {
   }
 };
 
-// function updateUI() {}
+function updateUI() {
+  document.querySelector(".city-image").src = getPlanData.image1;
+  document.querySelector(".image-icon").src = getPlanData.flag;
+  document.querySelector("'list-country").innerHTML =
+    getPlanData.name + ", " + getPlanData.countryCode;
+  document.querySelector(".call-code").innerHTML = getPlanData.callingCode;
+  document.querySelector(".currency").innerHTML =
+    getPlanData.currency + "(" + getPlanData.currencySym + ")";
+  document.querySelector(".language").innerHTML = getPlanData.language;
+  document.querySelector(".city-name").innerHTML = getPlanData.name;
+  document.querySelector(
+    ".icon-image"
+  ).src = `https://www.weatherbit.io/static/img/icons/${getPlanData.icon}.png`;
+  document.querySelector(".description").innerHTML = getPlanData.description;
+  document.querySelector(".temp").innerHTML = getPlanData.temp + "°C";
+  document.querySelector(".departure").innerHTML = getPlanData.date;
+}
 
 export { userInput };
