@@ -155,12 +155,12 @@ app.get('/getRest', async (req, res) => {
             res.send(null)
         }
         const restData = await response.json();
-        projectData['countryCode'] = restData.alpha2Code;
-        projectData['callingCode'] = restData.callingCodes;
-        projectData['currency'] = restData.currencies[0].name;
-        projectData['currencySym'] = restData.currencies[0].symbol;
-        projectData['language'] = restData.languages[0].name;
-        projectData['flag'] = restData.flag;
+        projectData['countryCode'] = restData[0].alpha2Code;
+        projectData['callingCode'] = restData[0].callingCodes;
+        projectData['currency'] = restData[0].currencies[0].name;
+        projectData['currencySym'] = restData[0].currencies[0].symbol;
+        projectData['language'] = restData[0].languages[0].name;
+        projectData['flag'] = restData[0].flag;
         res.send(restData);
         console.log(restData);
         // If failed connection to API, return null
