@@ -23,41 +23,58 @@
   </head>
 
   <body>
-    <div class="band">
-      <div class="item-1">
-        <a class="card">
-          <article>
-            <h1 class="main-title">Where is your next adventure?</h1>
-            <div class="search-bar">
-              <input
-                class="search-box"
-                type="text"
-                name="box"
-                id="city-input"
-                placeholder="Destination..."
-              />
-              <input type="text" id="date-picker" class="calender" />
-              <div class="search-btn" id="btn">
-                <i class="fas fa-search"></i>
-              </div>
+    <header>
+      <div class="grid-container">
+        <div class="title">
+          <h1 class="main-title">Where is your next adventure?</h1>
+        </div>
+        <div class="search">
+          <div class="search-bar">
+            <input
+              class="search-box"
+              type="text"
+              name="box"
+              id="city-input"
+              placeholder="Destination..."
+            />
+            <input
+              class="date-bar"
+              type="text"
+              id="date-picker"
+              class="calender"
+              placeholder="Departure date..."
+            />
+            <div class="search-btn" id="btn">
+              <i class="fas fa-search"></i>
             </div>
-          </article>
-        </a>
+          </div>
+        </div>
+        <div class="content">
+          <div class="travel-plan-card">
+            <div class="card-img">
+              <img
+                src="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1713&q=80"
+                alt=""
+              />
+            </div>
+            <div class="card-info">
+              <div class="your-trip">
+                <p class="trip-header">Your trip</p>
+              </div>
+              <hr class="line-break" />
+              <div class="city-name">London</div>
+              <div class="card-weather">
+                <div class="icon">☀️</div>
+                <div class="description-temp">
+                  <div class="description">Sunny</div>
+                  <div class="temp">12•C</div>
+                </div>
+              </div>
+              <div class="travel-date">Departure date: <span></span></div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="item-2">
-        <article>
-          <div class="city"></div>
-          <div class="date"></div>
-          <div class="image"></div>
-          <div class="weather"></div>
-          <div class="currency"></div>
-        </article>
-      </div>
-      <div class="item-3"></div>
-      <div class="item-4"></div>
-      <div class="item-5"></div>
-      <div class="item-6"></div>
-      <div class="item-7"></div>
-    </div>
+    </header>
   </body>
 </html>

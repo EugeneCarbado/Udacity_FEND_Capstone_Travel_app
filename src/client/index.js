@@ -6,7 +6,6 @@ import { userInput } from "./js/app";
 import "./styles/reset.scss";
 import "./styles/main.scss";
 import "./styles/calender.scss";
-// import './styles/footer.scss';
 // import './styles/form.scss';
 // import './styles/header.scss';
 

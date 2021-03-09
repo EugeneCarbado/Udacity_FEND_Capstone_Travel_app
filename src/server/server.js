@@ -91,8 +91,8 @@ app.get('/getWeatherbit', async (req, res) => {
         console.log(weatherbitData);
         // If failed connection to API, return null
     } catch (error) {
-        console.log(`Error connecting to server: ${error}`)
-        res.send(null)
+        console.log(`Error connecting to server: ${error}`);
+        res.send(null);
     }
 })
 
@@ -138,6 +138,36 @@ app.get('/getPix', async (req, res) => {
         console.log(`Error connecting to server: ${error}`)
         res.send(null)
     }
+})
+
+// endpoint for REST api
+app.get('/getRest', async (req, res) => {
+    console.log('Calling rest API');
+    const country = projectData.countryName;
+    const restUrl = `https://restcountries.eu/rest/v2/name/${country}`;
+    console.log(`Rest API url is ${restUrl}`);
+    try {
+        const response = await fetch(restUrl);
+
+        // Checks for failed data transfer from API, returns null
+        if (!response.ok) {
+            console.log(`Error connecting to Rest API. Response status ${response.status}`);
+            res.send(null)
+        }
+        const restData = await response.json();
+        projectData['countryCode'] = restData.alpha2Code;
+        projectData['callingCode'] = restData.callingCodes;
+        projectData['currency'] = restData.currencies[0].name;
+        projectData['currencySym'] = restData.currencies[0].symbol;
+        projectData['language'] = restData.languages[0].name;
+        projectData['flag'] = restData.flag;
+        res.send(restData);
+        console.log(restData);
+        // If failed connection to API, return null
+    } catch (error) {
+        console.log(`Error connecting to server: ${error}`);
+        res.send(null);
+    } 
 })
 
 app.get('/getData', (req, res) => {

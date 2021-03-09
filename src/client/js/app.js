@@ -33,10 +33,12 @@ async function userInput(e) {
 
     await callServer("/getPix");
 
+    await callServer("/getRest");
+
     const getPlanData = await callServer("/getData");
 
     console.log(getPlanData);
-    updateUI();
+    // updateUI();
   } else {
     alert("Please enter a valid date.");
   }
@@ -72,8 +74,6 @@ const callServer = async (url) => {
   }
 };
 
-function updateUI() {
-  
-}
+// function updateUI() {}
 
 export { userInput };
