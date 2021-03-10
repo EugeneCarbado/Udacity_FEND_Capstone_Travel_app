@@ -75,22 +75,25 @@ const callServer = async (url) => {
   }
 };
 
-function updateUI() {
-  document.querySelector(".city-image").src = getPlanData.image1;
-  document.querySelector(".image-icon").src = getPlanData.flag;
-  document.querySelector("'list-country").innerHTML =
-    getPlanData.name + ", " + getPlanData.countryCode;
-  document.querySelector(".call-code").innerHTML = getPlanData.callingCode;
+async function updateUI() {
+  const response = await fetch("/getData");
+  const uiData = await response.json();
+  console.log(uiData);
+  document.querySelector(".city-image").src = uiData.image1;
+  document.querySelector(".image-icon").src = uiData.flag;
+  document.querySelector(".list-country").innerHTML =
+    uiData.name + ", " + uiData.countryCode;
+  document.querySelector(".call-code").innerHTML = "+" + uiData.callingCode;
   document.querySelector(".currency").innerHTML =
-    getPlanData.currency + "(" + getPlanData.currencySym + ")";
-  document.querySelector(".language").innerHTML = getPlanData.language;
-  document.querySelector(".city-name").innerHTML = getPlanData.name;
+    uiData.currency + "(" + uiData.currencySym + ")";
+  document.querySelector(".language").innerHTML = uiData.language;
+  document.querySelector(".city-name").innerHTML = uiData.name;
   document.querySelector(
     ".icon-image"
-  ).src = `https://www.weatherbit.io/static/img/icons/${getPlanData.icon}.png`;
-  document.querySelector(".description").innerHTML = getPlanData.description;
-  document.querySelector(".temp").innerHTML = getPlanData.temp + "°C";
-  document.querySelector(".departure").innerHTML = getPlanData.date;
+  ).src = `https://www.weatherbit.io/static/img/icons/${uiData.icon}.png`;
+  document.querySelector(".description").innerHTML = uiData.description;
+  document.querySelector(".temp").innerHTML = uiData.temp + "°C";
+  document.querySelector(".departure").innerHTML = uiData.date;
 }
 
 export { userInput };
