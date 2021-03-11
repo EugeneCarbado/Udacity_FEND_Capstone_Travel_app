@@ -49,6 +49,8 @@
             </div>
           </div>
         </div>
+      </header>
+      <main>
         <div class="content">
           <div class="travel-plan-card">
             <div class="card-img">
@@ -83,6 +85,15 @@
           </div>
         </div>
       </div>
-    </header>
+    </main>
+    <script>
+      // Check that service workers are supported
+      if ("serviceWorker" in navigator) {
+        // Use the window load event to keep the page load performant
+        window.addEventListener("load", () => {
+          navigator.serviceWorker.register("/service-worker.js");
+        });
+      }
+    </script>
   </body>
 </html>
