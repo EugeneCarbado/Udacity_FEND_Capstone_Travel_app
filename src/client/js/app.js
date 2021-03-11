@@ -4,6 +4,7 @@ import { doc } from "prettier";
 // This event listener listens for a click on the search button
 document.getElementById("btn").addEventListener("click", userInput);
 
+
 // Function that fires off when the click has been registered
 async function userInput(e) {
   e.preventDefault();
@@ -99,4 +100,4 @@ async function updateUI() {
   document.querySelector(".departure").innerHTML = uiData.date;
 }
 
-export { updateUI };
+export { callServer, updateUI };
