@@ -45,6 +45,7 @@ async function userInput(e) {
   }
 }
 
+// post route for server
 async function postData(url, tripData) {
   const response = await fetch(url, {
     method: "POST",
@@ -57,6 +58,7 @@ async function postData(url, tripData) {
   });
 }
 
+// call to server for data
 const callServer = async (url) => {
   const asyncParams = {
     method: "GET",
@@ -75,7 +77,8 @@ const callServer = async (url) => {
   }
 };
 
-async function updateUI() {
+// function that updates the UI with a call to the server
+export async function updateUI() {
   const response = await fetch("/getData");
   const uiData = await response.json();
   console.log(uiData);
@@ -96,4 +99,4 @@ async function updateUI() {
   document.querySelector(".departure").innerHTML = uiData.date;
 }
 
-export { userInput };
+export { updateUI };

@@ -68,6 +68,7 @@ app.post('/clientData', async (req, res) => {
 
 });
 
+// Endpoint for the weatherBit API
 app.get('/getWeatherbit', async (req, res) => {
     console.log(`Request latitude is ${projectData.lat}`);
     console.log(`Request longitude is ${projectData.long}`);
@@ -170,10 +171,17 @@ app.get('/getRest', async (req, res) => {
     } 
 })
 
+// GET endpoint gets the data for the UI
 app.get('/getData', (req, res) => {
     console.log(projectData);
     res.send(projectData);
+    res.json({message: 'Data recieved'});
 })
+
+// Endpoint for testing express server
+app.get('/testEndpoint', async (req, res) => {
+    res.json({message: 'The endpoint test passed!'})
+  })
 
 
 module.exports = app;

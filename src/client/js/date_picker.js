@@ -1,5 +1,6 @@
 const datepicker = require("js-datepicker");
 
+// This is a function that display a calender on the input for date
 const picker = datepicker("#date-picker", {
   showAllDates: true,
   formatter: (input, date, instance) => {
