@@ -78,7 +78,7 @@ const callServer = async (url) => {
 };
 
 // function that updates the UI with a call to the server
-export async function updateUI() {
+async function updateUI() {
   const response = await fetch("/getData");
   const uiData = await response.json();
   console.log(uiData);
