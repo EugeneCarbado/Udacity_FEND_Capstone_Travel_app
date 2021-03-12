@@ -40,3 +40,12 @@ http://localhost:3000/
 Enter the city, departure date, and return date and then press the submit button.
 
 Then after htting the submit button the weather, country and city info shall be presented.
+
+Make this project stand out:
+
+- Intergrated in the project is REST API as a forth API call. Using this I can give extra data about the place that a person is going to visit such as currency, langauge and also the calling code for the country.
+
+- These is an if statement in the weatherBit API call so that if it does not find the city, then the country will be displayed so that pixaby can show an image of the country instead.
+
+- Icon's have been enabled to be displayed for the weather.
+
